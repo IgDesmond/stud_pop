@@ -1,5 +1,4 @@
 # stud_pop
-automated-student-pop-analytics
 Overview
 The Student Analytics App is an interactive web application built with Streamlit, designed to analyze and visualize student data for informed decision-making. The app provides educators, administrators, and stakeholders with insights into student performance, attendance, engagement, and other key metrics.
 ________________________________________
