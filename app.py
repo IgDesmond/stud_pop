@@ -24,7 +24,7 @@ try:
     with st.sidebar: 
             
         try:
-            st.header(":red[Meun]")
+            st.header(":red[Menu]")
             uploded_data = st.file_uploader("Upload your file", type={"csv", "txt"})
         
             if uploded_data is not None:
