@@ -1,4 +1,4 @@
- 
+
 import streamlit as st 
 import pandas  as pd 
 import numpy as np 
@@ -25,7 +25,7 @@ try:
             if uploded_data is not None:
                 df = pd.read_csv(uploded_data)
                     #st.write(df)
-            st.toast('Your file was uploaded successfully!', icon='😍')
+                st.toast('Your file was uploaded successfully!', icon='😍')
         except:
             st.warning("Use the upload channel in the menu to upload a csv file")
         
