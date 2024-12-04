@@ -14,37 +14,32 @@ try:
             initial_sidebar_state="expanded"
         )
 
-    # import sidebar
-    # sidebar.execute_sidebar()
-
-        #year = st.text_input('Enter current year')
-    st.markdown ("# :green[Newly Admitted Students Analytics]")
-
-    
-        
+    st.markdown ("# :green[Students Analytics]")
+     
     with st.sidebar: 
             
         try:
-            st.header(":red[Menu]")
+            st.header(":red[NAVIGATION BAR]")
             uploded_data = st.file_uploader("Upload your file", type={"csv", "txt"})
         
             if uploded_data is not None:
                 df = pd.read_csv(uploded_data)
                     #st.write(df)
+            st.toast('Your file was uploaded successfully!', icon='😍')
         except:
             st.warning("Use the upload channel in the menu to upload a csv file")
         
         options =  ["Admission Mode","Age", "Blood Group","College", "Current Level","Degree", "Denomination", "Gender","Genotype", "Kin Relationship","Admission Mode", "Religion"]
         select_options = st.multiselect(
-            "Select two items for one or two items to perform analytics",
-            options,
-            #["Degree", "Gender"],
+            "Select one or two items to perform analytics",
+            options,           
             max_selections=2 
             ) 
-        chart_type = st.selectbox('Choose another chat view program', ['Bar', 'Table']) 
+
+        chart_type = st.selectbox('Choose another chart view state distribution', ['Bar', 'Table']) 
 
 
-        #sidebar = { "backgroundColor": "#FFFFFF", "contrast": 1.2 }
+        
         df['Degree'] = df['Degree'].str.upper()
         df['Degree'] = df['Degree'].str.replace('\W', '', regex=True) # Removing punctuations
         df['State'] = df['State'].str.upper()
@@ -56,6 +51,7 @@ try:
         df['Nationality'] = df['Nationality'].str.upper()
 
     left_col, right_col = st.columns(2)
+
     with left_col:
         rows, columns = df.shape
         total_admitted_students = rows
@@ -154,7 +150,7 @@ try:
     
     stat1 = df.groupby(['Age'])['Age'].count().reset_index(name='Counts')
     fig = px.bar(stat1, x ='Counts', y ='Age', title='Age Distribution')   
-    st.plotly_chart(fig, use_container_width=True)
-    #st.write(age)
+    st.plotly_chart(fig, use_container_width=True) 
+    
 except:
     st.warning(':red[Upload your data to continue the analytics]', icon="⚠️")
