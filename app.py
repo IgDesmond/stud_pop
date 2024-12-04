@@ -1,3 +1,4 @@
+ 
 import streamlit as st 
 import pandas  as pd 
 import numpy as np 
@@ -33,7 +34,7 @@ try:
         except:
             st.warning("Use the upload channel in the menu to upload a csv file")
         
-        options =  ["Age", "Blood Group","College", "Degree", "Denomination", "Gender","Genotype", "Kin Relationship","Current Level", "Religion"]
+        options =  ["Admission Mode","Age", "Blood Group","College", "Current Level","Degree", "Denomination", "Gender","Genotype", "Kin Relationship","Admission Mode", "Religion"]
         select_options = st.multiselect(
             "Select two items for one or two items to perform analytics",
             options,
@@ -49,8 +50,10 @@ try:
         df['State'] = df['State'].str.upper()
         df['Department'] = df['Department'].str.upper()
         df['Program'] = df["Program"].str.rstrip() #Remove space at the end of a sentence
+        df['Admission Mode'] = df['Admission Mode'].str.upper()
 
-
+        df['Nationality'] = df["Nationality"].str.rstrip() #Remove space at the end of a sentence
+        df['Nationality'] = df['Nationality'].str.upper()
 
     left_col, right_col = st.columns(2)
     with left_col:
@@ -63,6 +66,11 @@ try:
         total_program = rows
         st.markdown(f"### Total number of Departments with admitted students: :red[  {total_program}]")
         
+        program_size = df.groupby(['Admission Mode'])['Admission Mode'].count().reset_index(name='count')
+        rows, columns = program_size.shape
+        total_program = rows
+        st.markdown(f"### Total number of Admission Mode for admitted students: :red[  {total_program}]")
+        
     with right_col:
         program_size = df.groupby(['State'])['State'].count().reset_index(name='count')
         rows, columns = program_size.shape
@@ -73,6 +81,11 @@ try:
         rows, columns = program_size.shape
         total_program = rows
         st.markdown(f"### Total number of Programs with admitted students: :red[  {total_program}]")
+
+        program_size = df.groupby(['Nationality'])['Nationality'].count().reset_index(name='count')
+        rows, columns = program_size.shape
+        total_program = rows
+        st.markdown(f"### Total number of Nationality of admitted students: :red[  {total_program}]")
 
     st.markdown(" --- ")
 
